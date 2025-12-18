@@ -1,0 +1,36 @@
+
+version: '3.8'
+
+services:
+  # OCR Processing Microservice
+  ocr-service:
+    build: 
+      context: ./backend/ocr_service
+    container_name: ocr-service
+    ports:
+      - "8000:8000"
+    environment:
+      - APPWRITE_ENDPOINT=http://appwrite/v1
+      - APPWRITE_PROJECT_ID=omni-ocr-prod
+      - APPWRITE_API_KEY=YOUR_SECURE_SERVER_KEY
+    networks:
+      - appwrite-network
+    restart: always
+
+  # Next.js Frontend (Production Build)
+  frontend:
+    build:
+      context: .
+    container_name: ocr-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_APPWRITE_ENDPOINT=https://api.omniocr.io/v1
+      - NEXT_PUBLIC_APPWRITE_PROJECT_ID=omni-ocr-prod
+    networks:
+      - appwrite-network
+    restart: always
+
+networks:
+  appwrite-network:
+    external: true # Assumes Appwrite is already running on this network

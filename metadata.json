@@ -1,0 +1,7 @@
+{
+  "name": "OmniOCR SaaS",
+  "description": "A production-ready OCR system with multiple engines (docTR, Tesseract, Mistral), secure API key management, and a real-time processing dashboard powered by Appwrite.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
